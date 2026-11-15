@@ -1,8 +1,8 @@
 {
-  "versionCode": 1,
-  "versionName": "0.1.0",
-  "url": "https://github.com/marcmayol/kawase/releases/download/v0.1.0/kawase-v0.1.0.apk",
-  "sha256": "ac7411bb3768eeca636b0d7768c07f2380e786a1507ac0fd477109a16226a639",
-  "notas": "Primera versión: escribe un precio en yenes y te lo dice en euros con el tipo del BCE. Sin red usa el último guardado.",
+  "versionCode": 2,
+  "versionName": "0.1.1",
+  "url": "https://github.com/marcmayol/kawase/releases/download/v0.1.1/kawase-v0.1.1.apk",
+  "sha256": "0eb0fb56e834546e08ed814866a0c61e14e8807ccbc9f5b5a948091db016c1a2",
+  "notas": "La app pasa a llamarse Yenes.",
   "check_horas": 24
 }
