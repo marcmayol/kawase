@@ -225,7 +225,7 @@ def generar_manifiesto(vc: int, vn: str, sha: str, notas: str) -> dict:
         "versionName": vn,
         "url": url_release(vn),
         "sha256": sha,
-        "notas": notas or f"Kawase {vn}.",
+        "notas": notas or f"Yenes {vn}.",
         "check_horas": _CHECK_HORAS,
     }
 
@@ -340,8 +340,8 @@ def publicar(apk: Path, manifiesto: dict, notas: str) -> None:
     _ejecutar([
         "gh", "release", "create", f"v{vn}", str(asset),
         "--repo", _REPO,
-        "--title", f"Kawase {vn}",
-        "--notes", notas or f"Kawase {vn}.",
+        "--title", f"Yenes {vn}",
+        "--notes", notas or f"Yenes {vn}.",
     ])
     _ejecutar(["git", "add", str(MANIFIESTO), str(FIRMA_ESPERADA)])
     _ejecutar(["git", "commit", "-m", f"Publica el manifiesto de la v{vn}"])
