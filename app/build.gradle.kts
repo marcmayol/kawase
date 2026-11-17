@@ -3,8 +3,9 @@ import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.compose.multiplatform)
 }
 
 // Firma de release: keystore.properties (gitignored) o variables KAWASE_*. Sin ninguna se
@@ -19,6 +20,45 @@ fun datoFirma(clave: String, entorno: String): String? =
         ?: System.getenv(entorno)?.takeIf { it.isNotBlank() }
 
 val storeFileRelease = datoFirma("storeFile", "KAWASE_STORE_FILE")
+
+kotlin {
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        }
+    }
+
+    // iosX64 para el simulador de los Mac con Intel.
+    listOf(iosX64(), iosArm64(), iosSimulatorArm64()).forEach { target ->
+        target.binaries.framework {
+            baseName = "ComposeApp"
+            isStatic = true
+        }
+    }
+
+    sourceSets {
+        commonMain.dependencies {
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.ui)
+            implementation(compose.components.resources)
+            implementation(libs.coroutines.core)
+        }
+        androidMain.dependencies {
+            implementation(libs.activity.compose)
+            implementation(libs.coroutines.android)
+            implementation(project(":actualizador"))
+        }
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+        }
+    }
+}
+
+compose.resources {
+    packageOfResClass = "com.marcmayol.kawase.res"
+}
 
 android {
     namespace = "com.marcmayol.kawase"
@@ -66,33 +106,11 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlin {
-        compilerOptions {
-            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
-        }
-    }
-
     buildFeatures {
-        compose = true
         buildConfig = true
     }
 
     packaging {
         resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
     }
-}
-
-dependencies {
-    implementation(project(":actualizador"))
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
-    implementation(platform(libs.compose.bom))
-    implementation(libs.compose.ui)
-    implementation(libs.compose.material3)
-    implementation(libs.compose.ui.tooling.preview)
-    debugImplementation(libs.compose.ui.tooling)
-
-    testImplementation(libs.junit4)
 }

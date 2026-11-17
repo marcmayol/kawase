@@ -13,3 +13,7 @@ captures/
 keystore.properties
 *.apk
 __pycache__/
+iosApp/*.xcodeproj/
+iosApp/iosApp/Info.plist
+xcuserdata/
+.DS_Store

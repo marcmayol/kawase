@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="refresh">Actualizar</string>
+    <string name="label_jpy">Precio en yenes</string>
+    <string name="label_eur">Precio en euros</string>
+    <string name="hint_jpy">1500, 3万, ¥3,980 (税込), 1500 + 300…</string>
+    <string name="hint_eur">12,50, 1.200…</string>
+    <string name="man_chip">万 ×10.000</string>
+    <string name="tax">+10 % impuestos</string>
+    <string name="with_tax">%1$s con impuestos</string>
+    <string name="swap_to_eur">€ → ¥</string>
+    <string name="swap_to_jpy">¥ → €</string>
+    <string name="fmt_eur">%1$s €</string>
+    <string name="fmt_jpy">%1$s ¥</string>
+    <string name="quick">Referencia rápida</string>
+    <string name="rate_line">1 € = %1$s ¥ · %2$s, %3$s</string>
+    <string name="offline">Sin conexión: uso el último tipo guardado.</string>
+    <string name="updated_now">Tipo consultado ahora mismo.</string>
+    <string name="loading">Consultando el tipo de hoy…</string>
+</resources>

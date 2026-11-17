@@ -1,0 +1,39 @@
+# Proyecto de Xcode de Yenes. No se versiona el .xcodeproj: se genera con XcodeGen.
+#   brew install xcodegen
+#   cd iosApp && xcodegen && open Yenes.xcodeproj
+name: Yenes
+options:
+  bundleIdPrefix: com.marcmayol
+  deploymentTarget:
+    iOS: "15.0"
+targets:
+  Yenes:
+    type: application
+    platform: iOS
+    sources:
+      - iosApp
+    scheme: {}
+    info:
+      path: iosApp/Info.plist
+      properties:
+        CFBundleDisplayName: Yenes
+        CFBundleShortVersionString: "0.2.0"
+        CFBundleVersion: "3"
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        CADisableMinimumFrameDurationOnPhone: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.marcmayol.yenes
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        CODE_SIGN_STYLE: Automatic
+        TARGETED_DEVICE_FAMILY: "1"
+        ENABLE_USER_SCRIPT_SANDBOXING: NO
+        FRAMEWORK_SEARCH_PATHS: "$(inherited) $(SRCROOT)/../app/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)"
+        OTHER_LDFLAGS: "$(inherited) -framework ComposeApp"
+    preBuildScripts:
+      - name: Compilar el código Kotlin
+        basedOnDependencyAnalysis: false
+        script: |
+          cd "$SRCROOT/.."
+          ./gradlew :app:embedAndSignAppleFrameworkForXcode
